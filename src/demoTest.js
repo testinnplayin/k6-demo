@@ -10,17 +10,18 @@ export const options = {
   duration: DURATION,
 };
 
-// export default function () {
-//   http.get(TEST_URL);
-
-//   sleep(1);
-// }
-
 export default function () {
-  const response = http.get(TEST_URL);
+  const possibilities = [TEST_URL, `${TEST_URL}s`];
+  const ind = Math.floor(Math.random() * possibilities.length);
+
+  const testUrl = possibilities[ind];
+
+  const response = http.get(testUrl);
 
   check(response, {
     "is status 200": (res) => res.status === 200,
     "is status 404": (res) => res.status === 404,
   });
+
+  sleep(1);
 }
